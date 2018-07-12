@@ -26,7 +26,7 @@ This package exports six functions:
 - `encodings()`: parses the Accept-Encoding header, emitting `{ encoding, weight }`
 - `languages()`: parses the Accept-Language header, emitting `{ language, weight }`
 - `transferEncodings()`: parses the TE header, emitting `{ encoding, params, weight }`
-- `parameters()`: parses `params` and `extensions` found above, emitting `{ key, value }`
+- `parameters()`: parses the `params` and `extensions` found above, emitting `{ key, value }`
 
 Each of the exported functions takes a string as the only argument. An iterator is returned, which parses one comma-separated item at a time. If the input string is invalid (according to [RFC 7230](https://tools.ietf.org/html/rfc7230) or [RFC 7231](https://tools.ietf.org/html/rfc7231)), an error will be thrown mid-iteration.
 
