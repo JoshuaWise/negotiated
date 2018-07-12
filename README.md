@@ -10,7 +10,7 @@ npm install --save negotiated
 
 ## Usage
 
-This package exports the following functions:
+The following functions are exported:
 
 - `accept`: parses the Accept header, emitting `{ type, params, weight, extensions }`
 - `accept-charset`: parses the Accept-Charset header, emitting `{ charset, weight }`
