@@ -1,10 +1,10 @@
 'use strict';
 const { expect } = require('chai');
-const { te: parse } = require('../.');
+const { transferEncodings: parse } = require('../.');
 
 const encoding = (encoding, weight, params = '') => ({ encoding, params, weight });
 
-describe('te', function () {
+describe('transferEncodings()', function () {
 	it('should throw when given invalid input', function () {
 		expect(() => [...parse(1)]).to.throw(TypeError);
 		expect(() => [...parse({})]).to.throw(TypeError);

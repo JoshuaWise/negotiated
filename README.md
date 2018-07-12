@@ -10,16 +10,25 @@ npm install --save negotiated
 
 ## Usage
 
+```js
+const negotiated = require('negotiated');
+
+const best = Array.from(negotiated.languages('fr;q=0.4, ja-JP;q=0.2, de-DE;q=0.7, en;q=0.5'))
+  .reduce((a, b) => a.weight >= b.weight ? a : b);
+
+console.log(best.language); // => "de-de"
+```
+
 This package exports six functions:
 
-- `accept`: parses the Accept header, emitting `{ type, params, weight, extensions }`
-- `accept-charset`: parses the Accept-Charset header, emitting `{ charset, weight }`
-- `accept-encoding`: parses the Accept-Encoding header, emitting `{ encoding, weight }`
-- `accept-language`: parses the Accept-Language header, emitting `{ language, weight }`
-- `te`: parses the TE header, emitting `{ encoding, params, weight }`
-- `parameters`: parses the `params` and `extensions` found above, emitting `{ key, value }`
+- `types()`: parses the Accept header, emitting `{ type, params, weight, extensions }`
+- `charsets()`: parses the Accept-Charset header, emitting `{ charset, weight }`
+- `encodings()`: parses the Accept-Encoding header, emitting `{ encoding, weight }`
+- `languages()`: parses the Accept-Language header, emitting `{ language, weight }`
+- `transferEncodings()`: parses the TE header, emitting `{ encoding, params, weight }`
+- `parameters()`: parses `params` and `extensions` found above, emitting `{ key, value }`
 
-Each of the exported functions takes a string as the only parameter. An iterator is returned, which parses one comma-separated item at a time. If the input string is invalid (according to [RFC 7230](https://tools.ietf.org/html/rfc7230) or [RFC 7231](https://tools.ietf.org/html/rfc7231)), an error will be thrown mid-iteration.
+Each of the exported functions takes a string as the only argument. An iterator is returned, which parses one comma-separated item at a time. If the input string is invalid (according to [RFC 7230](https://tools.ietf.org/html/rfc7230) or [RFC 7231](https://tools.ietf.org/html/rfc7231)), an error will be thrown mid-iteration.
 
 ## Examples
 
@@ -33,19 +42,6 @@ for (const { encoding, weight } of parse('gzip;q=0.5, my-custom-encoding;q=1')) 
 }
 
 // => "my-custom-encoding is desired"
-```
-
-#### Finding the highest-ranked language
-
-```js
-const { 'accept-language': parse } = require('negotiated');
-
-const best = Array.from(parse('fr;q=0.4, ja-JP;q=0.2, de-DE;q=0.7, en;q=0.5'))
-  .reduce((a, b) => a.weight >= b.weight ? a : b);
-
-console.log(best.language);
-
-// => "de-de"
 ```
 
 #### Parsing media parameters
