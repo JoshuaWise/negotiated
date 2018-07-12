@@ -51,7 +51,5 @@ const negotiated = require('negotiated');
 
 const firstItem = Array.from(negotiated.types('application/json; CHARSET="utf-8"'))[0];
 
-console.log(Array.from(negotiated.parameters(firstItem.params)));
-
-// => [{ key: 'charset', value: 'utf-8' }]
+console.log(Array.from(negotiated.parameters(firstItem.params))); // => [{ key: 'charset', value: 'utf-8' }]
 ```
