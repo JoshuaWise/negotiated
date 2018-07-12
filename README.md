@@ -35,9 +35,9 @@ Each of the exported functions takes a string as the only argument. An iterator 
 #### Iterating over the Accept-Encoding header
 
 ```js
-const { 'accept-encoding': parse } = require('negotiated');
+const negotiated = require('negotiated');
 
-for (const { encoding, weight } of parse('gzip;q=0.5, my-custom-encoding;q=1')) {
+for (const { encoding, weight } of negotiated.encodings('gzip;q=0.5, my-custom-encoding;q=1')) {
   if (weight > 0.8) console.log(`${encoding} is desired`);
 }
 
@@ -49,8 +49,9 @@ for (const { encoding, weight } of parse('gzip;q=0.5, my-custom-encoding;q=1')) 
 ```js
 const negotiated = require('negotiated');
 
-const [{ params }] = Array.from(negotiated.accept('application/json; CHARSET="utf-8"'));
-console.log(Array.from(negotiated.parameters(params)));
+const firstItem = Array.from(negotiated.types('application/json; CHARSET="utf-8"'))[0];
+
+console.log(Array.from(negotiated.parameters(firstItem.params)));
 
 // => [{ key: 'charset', value: 'utf-8' }]
 ```
