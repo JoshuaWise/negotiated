@@ -49,7 +49,7 @@ for (const { encoding, weight } of negotiated.encodings('gzip;q=0.5, my-custom-e
 ```js
 const negotiated = require('negotiated');
 
-const firstItem = Array.from(negotiated.types('application/json; CHARSET="utf-8"'))[0];
+const [{ params }] = Array.from(negotiated.types('application/json; CHARSET="utf-8"'));
 
-console.log(Array.from(negotiated.parameters(firstItem.params))); // => [{ key: 'charset', value: 'utf-8' }]
+console.log(Array.from(negotiated.parameters(params))); // => [{ key: 'charset', value: 'utf-8' }]
 ```
