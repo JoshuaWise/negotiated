@@ -1,10 +1,10 @@
 'use strict';
 const { expect } = require('chai');
-const { types: parse } = require('../.');
+const { mediaTypes: parse } = require('../.');
 
 const type = (type, weight, params = '', extensions = '') => ({ type, params, weight, extensions });
 
-describe('types()', function () {
+describe('mediaTypes()', function () {
 	it('should throw when given invalid input', function () {
 		expect(() => [...parse(1)]).to.throw(TypeError);
 		expect(() => [...parse({})]).to.throw(TypeError);

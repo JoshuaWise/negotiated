@@ -21,7 +21,7 @@ console.log(best.language); // => "de-de"
 
 This package exports six functions:
 
-- `types()`: parses the Accept header, emitting `{ type, params, weight, extensions }`
+- `mediaTypes()`: parses the Accept header, emitting `{ type, params, weight, extensions }`
 - `charsets()`: parses the Accept-Charset header, emitting `{ charset, weight }`
 - `encodings()`: parses the Accept-Encoding header, emitting `{ encoding, weight }`
 - `languages()`: parses the Accept-Language header, emitting `{ language, weight }`
@@ -49,7 +49,7 @@ for (const { encoding, weight } of negotiated.encodings('gzip;q=0.5, my-custom-e
 ```js
 const negotiated = require('negotiated');
 
-const [{ params }] = Array.from(negotiated.types('application/json; CHARSET="utf-8"'));
+const [{ params }] = Array.from(negotiated.mediaTypes('application/json; CHARSET="utf-8"'));
 
 console.log(Array.from(negotiated.parameters(params))); // => [{ key: 'charset', value: 'utf-8' }]
 ```

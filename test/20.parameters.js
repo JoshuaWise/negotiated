@@ -1,6 +1,6 @@
 'use strict';
 const { expect } = require('chai');
-const { parameters, types, transferEncodings } = require('../.');
+const { parameters, mediaTypes, transferEncodings } = require('../.');
 
 const param = (key, value) => ({ key, value });
 const parse = (iterator, ext = false) => [...parameters([...iterator][0][ext ? 'extensions' : 'params'])];
@@ -18,10 +18,10 @@ describe('parameters', function () {
 		expect(() => [...parameters('; foo="bar" ')]).to.throw(Error);
 	});
 	it('should correctly parse media parameters', function () {
-		expect(parse(types('#/#; a=b'))).to.deep.equal([param('a', 'b')]);
-		expect(parse(types('#/#; FOO=BAR'))).to.deep.equal([param('foo', 'BAR')]);
-		expect(parse(types('#/#; FOO=" ;ba\\r\\\\\\\" "'))).to.deep.equal([param('foo', ' ;bar\\" ')]);
-		expect(parse(types('#/#;   FOO=" ;ba\\r\\\\\\\" "  ;  *=bcde123'))).to.deep.equal([
+		expect(parse(mediaTypes('#/#; a=b'))).to.deep.equal([param('a', 'b')]);
+		expect(parse(mediaTypes('#/#; FOO=BAR'))).to.deep.equal([param('foo', 'BAR')]);
+		expect(parse(mediaTypes('#/#; FOO=" ;ba\\r\\\\\\\" "'))).to.deep.equal([param('foo', ' ;bar\\" ')]);
+		expect(parse(mediaTypes('#/#;   FOO=" ;ba\\r\\\\\\\" "  ;  *=bcde123'))).to.deep.equal([
 			param('foo', ' ;bar\\" '),
 			param('*', 'bcde123'),
 		]);
@@ -36,11 +36,11 @@ describe('parameters', function () {
 		]);
 	});
 	it('should correctly parse extension parameters', function () {
-		expect(parse(types('#/#;q=1; a=b'), true)).to.deep.equal([param('a', 'b')]);
-		expect(parse(types('#/#;q=1; A'), true)).to.deep.equal([param('a')]);
-		expect(parse(types('#/#;q=1; FOO=BAR'), true)).to.deep.equal([param('foo', 'BAR')]);
-		expect(parse(types('#/#;q=1; FOO=" ;ba\\r\\\\\\\" "'), true)).to.deep.equal([param('foo', ' ;bar\\" ')]);
-		expect(parse(types('#/#;q=1;   FOO=" ;ba\\r\\\\\\\" "  ; X  ; YZ ;  *=bcde123; ***'), true)).to.deep.equal([
+		expect(parse(mediaTypes('#/#;q=1; a=b'), true)).to.deep.equal([param('a', 'b')]);
+		expect(parse(mediaTypes('#/#;q=1; A'), true)).to.deep.equal([param('a')]);
+		expect(parse(mediaTypes('#/#;q=1; FOO=BAR'), true)).to.deep.equal([param('foo', 'BAR')]);
+		expect(parse(mediaTypes('#/#;q=1; FOO=" ;ba\\r\\\\\\\" "'), true)).to.deep.equal([param('foo', ' ;bar\\" ')]);
+		expect(parse(mediaTypes('#/#;q=1;   FOO=" ;ba\\r\\\\\\\" "  ; X  ; YZ ;  *=bcde123; ***'), true)).to.deep.equal([
 			param('foo', ' ;bar\\" '),
 			param('x'),
 			param('yz'),
