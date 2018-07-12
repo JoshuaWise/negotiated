@@ -21,7 +21,7 @@ This package exports six functions:
 
 Each of the exported functions takes a string as the only parameter. An iterator is returned, which parses one comma-separated item at a time. If the input string is invalid (according to [RFC 7230](https://tools.ietf.org/html/rfc7230) or [RFC 7231](https://tools.ietf.org/html/rfc7231)), an error will be thrown mid-iteration.
 
-### Examples
+## Examples
 
 #### Iterating over the Accept-Encoding header
 
