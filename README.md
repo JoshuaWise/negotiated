@@ -29,7 +29,7 @@ Each of the exported functions takes a string as the only parameter. An iterator
 const { 'accept-encoding': parse } = require('negotiated');
 
 for (const { encoding, weight } of parse('gzip;q=0.5, my-custom-encoding;q=1')) {
-	if (weight > 0.8) console.log(`${encoding} is desired`);
+  if (weight > 0.8) console.log(`${encoding} is desired`);
 }
 
 // => "my-custom-encoding is desired"
@@ -41,7 +41,7 @@ for (const { encoding, weight } of parse('gzip;q=0.5, my-custom-encoding;q=1')) 
 const { 'accept-language': parse } = require('negotiated');
 
 const best = Array.from(parse('fr;q=0.4, ja-JP;q=0.2, de-DE;q=0.7, en;q=0.5'))
-	.reduce((a, b) => a.weight >= b.weight ? a : b);
+  .reduce((a, b) => a.weight >= b.weight ? a : b);
 
 console.log(best.language);
 
