@@ -53,7 +53,7 @@ console.log(best.language);
 ```js
 const negotiated = require('negotiated');
 
-const { params } = negotiated.accept('application/json; CHARSET="utf-8"');
+const [{ params }] = Array.from(negotiated.accept('application/json; CHARSET="utf-8"'));
 console.log(Array.from(negotiated.parameters(params)));
 
 // => [{ key: 'charset', value: 'utf-8' }]
