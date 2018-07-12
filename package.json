@@ -1,7 +1,7 @@
 {
   "name": "negotiated",
   "version": "0.1.0",
-  "description": "A low-level, spec-compliant utility for iterating over HTTP content negotiation headers",
+  "description": "A low-level, standards-compliant utility for iterating over HTTP content negotiation headers",
   "main": "lib/index.js",
   "devDependencies": {
     "chai": "^4.1.2",
