@@ -21,8 +21,8 @@ describe('parameters', function () {
 		expect(parse(mediaTypes('#/#; a=b'))).to.deep.equal([param('a', 'b')]);
 		expect(parse(mediaTypes('#/#; FOO=BAR'))).to.deep.equal([param('foo', 'BAR')]);
 		expect(parse(mediaTypes('#/#; FOO=" ;ba\\r\\\\\\\" "'))).to.deep.equal([param('foo', ' ;bar\\" ')]);
-		expect(parse(mediaTypes('#/#;   FOO=" ;ba\\r\\\\\\\" "  ;  *=bcde123'))).to.deep.equal([
-			param('foo', ' ;bar\\" '),
+		expect(parse(mediaTypes('#/#;   FOO=" ;\u03c0\u{1f600}ba\\r\\\\\\\" "  ;  *=bcde123'))).to.deep.equal([
+			param('foo', ' ;\u03c0\u{1f600}bar\\" '),
 			param('*', 'bcde123'),
 		]);
 	});

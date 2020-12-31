@@ -32,9 +32,9 @@ describe('mediaTypes()', function () {
 	});
 	it('should correctly capture media parameters', function () {
 		expect([...parse('foo/bar; baz=qux')]).to.deep.equal([type('foo/bar', 1, '; baz=qux')]);
-		expect([...parse('foo/BAR  ;  baz=qux  ,  a/b;c=d ;  e=" f\\\",; "')]).to.deep.equal([
+		expect([...parse('foo/BAR  ;  baz=qux  ,  a/b;c=d ;  e=" f\\\",;\u03c0\u{1f600} "')]).to.deep.equal([
 			type('foo/bar', 1, '  ;  baz=qux'),
-			type('a/b', 1, ';c=d ;  e=" f\\\",; "'),
+			type('a/b', 1, ';c=d ;  e=" f\\\",;\u03c0\u{1f600} "'),
 		]);
 	});
 	it('should correctly parse the weight parameter', function () {
@@ -54,8 +54,8 @@ describe('mediaTypes()', function () {
 			type('foo/bar', 0, '', '  ;  x;  y=z'),
 			type('baz/qux', 1, '', ';a;b=" hello, ";c'),
 		]);
-		expect([...parse('foo/bar; x=y ; ok=" ;good, " ;  q=0.221  ;  x;  y=" hello, ",  baz/QUX  ; a=bcd123 ;  q=1.000; q=0')]).to.deep.equal([
-			type('foo/bar', 0.221, '; x=y ; ok=" ;good, "', '  ;  x;  y=" hello, "'),
+		expect([...parse('foo/bar; x=y ; ok=" ;good, " ;  q=0.221  ;  x;  y=" hello\u03c0\u{1f600}, ",  baz/QUX  ; a=bcd123 ;  q=1.000; q=0')]).to.deep.equal([
+			type('foo/bar', 0.221, '; x=y ; ok=" ;good, "', '  ;  x;  y=" hello\u03c0\u{1f600}, "'),
 			type('baz/qux', 1, '  ; a=bcd123', '; q=0'),
 		]);
 	});
