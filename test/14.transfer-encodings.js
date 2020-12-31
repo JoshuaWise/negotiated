@@ -40,10 +40,10 @@ describe('transferEncodings()', function () {
 	it('should correctly capture transfer-encoding parameters', function () {
 		expect([...parse('foo; baz=qux')]).to.deep.equal([encoding('foo', 1, '; baz=qux')]);
 		expect([...parse('foo; baz  =  qux')]).to.deep.equal([encoding('foo', 1, '; baz  =  qux')]);
-		expect([...parse('FOO  ;  baz= qux  ,trailers,  deflate ,  a;b=c ;  d =" e\\\"\u03c0\u{1f600},; "')]).to.deep.equal([
+		expect([...parse('FOO  ;  baz= qux  ,trailers,  deflate ,  a;b=c ;  d =" e\\\",; "')]).to.deep.equal([
 			encoding('foo', 1, '  ;  baz= qux'),
 			encoding('deflate', 1),
-			encoding('a', 1, ';b=c ;  d =" e\\\"\u03c0\u{1f600},; "'),
+			encoding('a', 1, ';b=c ;  d =" e\\\",; "'),
 		]);
 	});
 	it('should correctly parse the weight parameter', function () {
